@@ -4,6 +4,7 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 import flask
 from flask import request, jsonify
+from flask_cors import CORS
 
 from datetime import datetime
 
@@ -33,7 +34,7 @@ def main():
         print('New messages:')
         last_checked = open("last-checked-id", "r").read();
         new_messages = []
-        lokallagene = {}
+        lokallagene = []
         for message in messages:            
             #if message["id"] == last_checked:
             #    break
@@ -53,8 +54,9 @@ def main():
             if time_since.days > 0:
                 break
 
+
             if snippet:
-                lokallagene[result.get('id', "x")] = [lokallag, str(message_date)]
+                lokallagene.append({"chapter":lokallag, "timestamp":str(int(internalDate)/1000)})
 
         return lokallagene
 
@@ -63,6 +65,7 @@ def main():
 if __name__ == '__main__':
     #main()
     app = flask.Flask(__name__)
+    CORS(app)
     app.config["DEBUG"] = True
 
 
