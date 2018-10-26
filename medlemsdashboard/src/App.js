@@ -6,6 +6,7 @@ import differenceInMinutes from 'date-fns/difference_in_minutes';
 import nblocale from 'date-fns/locale/nb';
 import bikebell from './bikebell.mp3';
 import Sound from 'react-sound';
+import arildBilde from './arild.jpeg';
 
 
 class App extends Component {
@@ -43,12 +44,13 @@ class App extends Component {
               minutesSince: differenceInMinutes(new Date(), signedUpDate)}
     });
     if (render_State.length < 2) {
-      return (<div className="App"><h1>STÅ PÅ MILJØHELTER!</h1>
+      return (<div className="App"><h1>STÅ PÅ, MILJØHELTER!</h1>
+        <img src={arildBilde} />
 
         </div>)
     }
 
-    const newMemberNow = render_State[0].minutesSince < 10;
+    const newMemberNow = render_State[0].minutesSince < 3;
       
 
     return (
@@ -61,10 +63,11 @@ class App extends Component {
    onPlaying={this.handleSongPlaying}
    onFinishedPlaying={this.handleSongFinishedPlaying}
    />} 
+   <h2>Gratulerer med nytt medlem til:</h2>
       <ul >
 
       {render_State.map(function(member, i) {
-        return <li key={i} className={""+member.minutesSince < 10 && "new"}><div className={"chapter"}>{member.chapter}</div><div className="time"> for {member.timeSince} siden</div> </li>
+        return <li key={i} className={member.minutesSince < 60 ? "new" : undefined}><div className={"chapter"}>{member.chapter}</div><div className="time"> for {member.timeSince} siden</div> </li>
       })}
         
       </ul>

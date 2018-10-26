@@ -47,6 +47,8 @@ def main():
             result = service.users().messages().get(userId="me",id=messageid).execute()
             print(messageid)
             snippet = result.get('snippet',[])
+            if not "meldt seg inn i" in snippet:
+                continue
             lokallag = snippet.split("meldt seg inn i ")[1].split(". L")[0]
             internalDate = result.get('internalDate', 0)
             message_date = datetime.fromtimestamp(float(internalDate)/1000)
