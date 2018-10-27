@@ -55,7 +55,7 @@ class NewMemberList extends Component {
     return <li key={i} className={minutesSince < HILIGHT_TRESHOLD_MINUTES ? "new" : undefined}>
               <div className={"chapter"}>{member.chapter} </div>
               <div className="time"> {timeSinceWords}</div>
-              {minutesSince < HILIGHT_TRESHOLD_MINUTES && 
+              {minutesSince < NOTIFICATION_TRESHOLD_MINUTES && 
                 <audio ref={myRef} src={bikebell} autoPlay/>}
             </li>
   }
