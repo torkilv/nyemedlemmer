@@ -34,11 +34,11 @@ def getMailbodyAndTimeFromGmail(service, messageid):
      return result.get('snippet',[]), result.get('internalDate', 0)
 
 
-def isOlderThanTreshold(timestamp, day_treshold):
+def isOlderThanTreshold(timestamp, hour_treshold):
     dateTime = datetime.fromtimestamp(int(timestamp)/1000)
     time_since_registration = datetime.today() - dateTime
 
-    return time_since_registration.days > day_treshold
+    return time_since_registration.seconds//3600 > hour_treshold
 
 
 def getMembershipDataFromEmail(messageid, service):
@@ -55,7 +55,7 @@ def getMembershipDataFromEmail(messageid, service):
     }
 
 
-def getNewMembers(day_treshold):
+def getNewMembers(hour_treshold):
     service = setupGmailService()
     new_memberships =  []
 
@@ -65,7 +65,7 @@ def getNewMembers(day_treshold):
         if not membershipData:
             continue
 
-        if isOlderThanTreshold(membershipData["timestamp"], day_treshold):
+        if isOlderThanTreshold(membershipData["timestamp"], hour_treshold):
             break
 
         new_memberships.append(membershipData)
@@ -83,8 +83,8 @@ if __name__ == '__main__':
     def home():
         return jsonify(getNewMembers(0))
 
-    @server.route('/newmembers/<day_treshold>', methods=['GET'])
-    def specific_day(day_treshold):
-        return jsonify(getNewMembers(int(day_treshold)))
+    @server.route('/newmembers/<hour_treshold>', methods=['GET'])
+    def specific_day(hour_treshold):
+        return jsonify(getNewMembers(int(hour_treshold)))
 
     server.run()

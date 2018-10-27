@@ -10,7 +10,7 @@ import arildBilde from './arild.jpeg';
 var API_GET_NEW_MEMBERS_URL = "http://0.0.0.0:5000/newmembers"
 var NOTIFICATION_TRESHOLD_MINUTES = 3
 var HILIGHT_TRESHOLD_MINUTES = 60
-var SHOWN_DAYS_TRESHOLD = 0
+var SHOWN_HOURS_TRESHOLD = 10
 
 class NewMemberList extends Component {
 
@@ -20,7 +20,7 @@ class NewMemberList extends Component {
 
   getItems() {
     axios
-    .get(API_GET_NEW_MEMBERS_URL+"/" + SHOWN_DAYS_TRESHOLD)
+    .get(API_GET_NEW_MEMBERS_URL+"/" + SHOWN_HOURS_TRESHOLD)
     .then( response =>  {
         const newState = {new_members: response.data};
         this.setState(newState);
@@ -68,7 +68,7 @@ class NewMemberList extends Component {
 
     return (
     <div className="NewMemberList">
-      <h1>NYE MEDLEMMER DET SISTE DØGNET: {this.state.new_members.length} </h1>
+      <h1>{this.state.new_members.length} NYE MEDLEMMER SISTE {SHOWN_HOURS_TRESHOLD} TIMER!</h1>
 
       <h2>Gratulerer med nytt medlem til:</h2>
 
