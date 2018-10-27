@@ -10,7 +10,7 @@ from datetime import datetime
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-
+messagesStore= {}
 
 def setupGmailService():
     store = file.Storage('token.json')
@@ -30,8 +30,11 @@ def getEmailListFromGmail(service):
 
 
 def getMailbodyAndTimeFromGmail(service, messageid):
-     result = service.users().messages().get(userId="me",id=messageid).execute()
-     return result.get('snippet',[]), result.get('internalDate', 0)
+    if messageid not in messagesStore:
+        result = service.users().messages().get(userId="me",id=messageid).execute()
+        messagesStore[messageid] = (result.get('snippet',[]), result.get('internalDate', 0))
+
+    return messagesStore[messageid]
 
 
 def isOlderThanTreshold(timestamp, hour_treshold):
