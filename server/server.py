@@ -79,11 +79,11 @@ if __name__ == '__main__':
     server.config["DEBUG"] = True
 
 
-    @server.route('/', methods=['GET'])
+    @server.route('/newmembers', methods=['GET'])
     def home():
         return jsonify(getNewMembers(0))
 
-    @server.route('/<day_treshold>', methods=['GET'])
+    @server.route('/newmembers/<day_treshold>', methods=['GET'])
     def specific_day(day_treshold):
         return jsonify(getNewMembers(int(day_treshold)))
 

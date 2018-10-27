@@ -7,7 +7,7 @@ import nblocale from 'date-fns/locale/nb';
 import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
-var API_GET_NEW_MEMBERS_URL = "http://0.0.0.0:5000"
+var API_GET_NEW_MEMBERS_URL = "http://0.0.0.0:5000/newmembers"
 var NOTIFICATION_TRESHOLD_MINUTES = 3
 var HILIGHT_TRESHOLD_MINUTES = 60
 var SHOWN_DAYS_TRESHOLD = 0
