@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './NewMemberList.css';
 import axios from 'axios';
 import distanceInWordsToNow  from 'date-fns/distance_in_words_to_now';
 import differenceInMinutes from 'date-fns/difference_in_minutes';
@@ -7,7 +7,11 @@ import nblocale from 'date-fns/locale/nb';
 import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
-class App extends Component {
+var API_GET_NEW_MEMBERS_URL = "http://0.0.0.0:5000"
+var NEW_MEMBER_NOTIFICATION_TRESHHOLD = 3
+var NEW_MEMBER_HILIGHT_TRESHHOLD = 60
+
+class NewMemberList extends Component {
 
   state = {
     new_members: []
@@ -15,7 +19,7 @@ class App extends Component {
 
   getItems() {
     axios
-    .get("http://0.0.0.0:5000")
+    .get(API_GET_NEW_MEMBERS_URL)
     .then( response =>  {
         const newState = {new_members: response.data};
         this.setState(newState);
@@ -24,33 +28,34 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => this.getItems(), 180000);
+    this.timer = setInterval(() => this.getItems(), NEW_MEMBER_NOTIFICATION_TRESHHOLD * 60 * 10000);
     this.getItems();
   }
 
   componentWillUnmount() {
-    this.timer = null; 
+    this.timer = null;
   }
 
   defaultPage() {
     return (
-      <div className="App"><h1>STÅ PÅ, MILJØHELTER!</h1>
+      <div className="NewMemberList"><h1>STÅ PÅ, MILJØHELTER!</h1>
         <img alt="Arild på sykkel" src={arildBilde} />
       </div>);
   }
 
   createListItemForMember(member, i) {
-    const signedUpDate = new Date(member.timestamp*1000);
+    const signedUpTime = new Date(member.timestamp*1000);
 
-    const timeSinceWords = "for "+distanceInWordsToNow(signedUpDate, {locale: nblocale}) + " siden";
-    const minutesSince = differenceInMinutes(new Date(), signedUpDate);
+    const timeSinceWords = "for "+distanceInWordsToNow(signedUpTime, {locale: nblocale}) + " siden";
+    const minutesSince = differenceInMinutes(new Date(), signedUpTime);
     
     const myRef = React.createRef();
 
-    return <li key={i} className={minutesSince < 60 ? "new" : undefined}>
+    return <li key={i} className={minutesSince < NEW_MEMBER_HILIGHT_TRESHHOLD ? "new" : undefined}>
               <div className={"chapter"}>{member.chapter} </div>
-              <div className="time"> {timeSinceWords}</div> 
-              {minutesSince < 3 && <audio ref={myRef} src={bikebell} autoPlay/>}
+              <div className="time"> {timeSinceWords}</div>
+              {minutesSince < NEW_MEMBER_NOTIFICATION_TRESHHOLD && 
+                <audio ref={myRef} src={bikebell} autoPlay/>}
             </li>
   }
 
@@ -61,17 +66,18 @@ class App extends Component {
     }
 
     return (
-    <div className="App">
+    <div className="NewMemberList">
       <h1>NYE MEDLEMMER DET SISTE DØGNET: {this.state.new_members.length} </h1>
-      
+
       <h2>Gratulerer med nytt medlem til:</h2>
-   
+
       <ul>
         {this.state.new_members.map(this.createListItemForMember)}
       </ul>
-    </div>  
+    </div>
     );
   }
 }
 
-export default App;
+
+export default NewMemberList;
