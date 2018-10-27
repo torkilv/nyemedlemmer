@@ -5,9 +5,7 @@ import distanceInWordsToNow  from 'date-fns/distance_in_words_to_now';
 import differenceInMinutes from 'date-fns/difference_in_minutes';
 import nblocale from 'date-fns/locale/nb';
 import bikebell from './bikebell.mp3';
-import Sound from 'react-sound';
 import arildBilde from './arild.jpeg';
-
 
 class App extends Component {
 
@@ -26,53 +24,52 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(()=> this.getItems(), 180000);
+    this.timer = setInterval(() => this.getItems(), 180000);
     this.getItems();
-
   }
 
   componentWillUnmount() {
-  this.timer = null; // here...
+    this.timer = null; 
+  }
+
+  defaultPage() {
+    return (
+      <div className="App"><h1>STÅ PÅ, MILJØHELTER!</h1>
+        <img alt="Arild på sykkel" src={arildBilde} />
+      </div>);
+  }
+
+  createListItemForMember(member, i) {
+    const signedUpDate = new Date(member.timestamp*1000);
+
+    const timeSinceWords = "for "+distanceInWordsToNow(signedUpDate, {locale: nblocale}) + " siden";
+    const minutesSince = differenceInMinutes(new Date(), signedUpDate);
+    
+    const myRef = React.createRef();
+
+    return <li key={i} className={minutesSince < 60 ? "new" : undefined}>
+              <div className={"chapter"}>{member.chapter} </div>
+              <div className="time"> {timeSinceWords}</div> 
+              {minutesSince < 3 && <audio ref={myRef} src={bikebell} autoPlay/>}
+            </li>
   }
 
   render() {
-    const render_State = this.state.new_members.map(function(member) {
-      const signedUpDate = new Date(member.timestamp*1000);
 
-      return {chapter: member.chapter,
-              timeSince: distanceInWordsToNow(signedUpDate, {locale: nblocale}),
-              minutesSince: differenceInMinutes(new Date(), signedUpDate)}
-    });
-    if (render_State.length < 2) {
-      return (<div className="App"><h1>STÅ PÅ, MILJØHELTER!</h1>
-        <img src={arildBilde} />
-
-        </div>)
+    if (this.state.new_members.length < 2) {
+      return this.defaultPage();
     }
 
-    const newMemberNow = render_State[0].minutesSince < 3;
-      
-
     return (
-      <div className="App">
+    <div className="App">
       <h1>NYE MEDLEMMER DET SISTE DØGNET: {this.state.new_members.length} </h1>
-      {newMemberNow && <Sound
-   url={bikebell}
-   playStatus={Sound.status.PLAYING}
-   onLoading={this.handleSongLoading}
-   onPlaying={this.handleSongPlaying}
-   onFinishedPlaying={this.handleSongFinishedPlaying}
-   />} 
-   <h2>Gratulerer med nytt medlem til:</h2>
-      <ul >
-
-      {render_State.map(function(member, i) {
-        return <li key={i} className={member.minutesSince < 60 ? "new" : undefined}><div className={"chapter"}>{member.chapter}</div><div className="time"> for {member.timeSince} siden</div> </li>
-      })}
-        
-      </ul>
-      </div>
       
+      <h2>Gratulerer med nytt medlem til:</h2>
+   
+      <ul>
+        {this.state.new_members.map(this.createListItemForMember)}
+      </ul>
+    </div>  
     );
   }
 }
