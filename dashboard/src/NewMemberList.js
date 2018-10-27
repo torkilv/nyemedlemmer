@@ -8,8 +8,9 @@ import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
 var API_GET_NEW_MEMBERS_URL = "http://0.0.0.0:5000"
-var NEW_MEMBER_NOTIFICATION_TRESHHOLD = 3
-var NEW_MEMBER_HILIGHT_TRESHHOLD = 60
+var NOTIFICATION_TRESHOLD_MINUTES = 3
+var HILIGHT_TRESHOLD_MINUTES = 60
+var SHOWN_DAYS_TRESHOLD = 0
 
 class NewMemberList extends Component {
 
@@ -19,7 +20,7 @@ class NewMemberList extends Component {
 
   getItems() {
     axios
-    .get(API_GET_NEW_MEMBERS_URL)
+    .get(API_GET_NEW_MEMBERS_URL+"/" + SHOWN_DAYS_TRESHOLD)
     .then( response =>  {
         const newState = {new_members: response.data};
         this.setState(newState);
@@ -28,7 +29,7 @@ class NewMemberList extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => this.getItems(), NEW_MEMBER_NOTIFICATION_TRESHHOLD * 60 * 10000);
+    this.timer = setInterval(() => this.getItems(), NOTIFICATION_TRESHOLD_MINUTES * 60 * 1000);
     this.getItems();
   }
 
@@ -44,17 +45,17 @@ class NewMemberList extends Component {
   }
 
   createListItemForMember(member, i) {
-    const signedUpTime = new Date(member.timestamp*1000);
+    const signedUpTime = new Date(member.timestamp);
 
     const timeSinceWords = "for "+distanceInWordsToNow(signedUpTime, {locale: nblocale}) + " siden";
     const minutesSince = differenceInMinutes(new Date(), signedUpTime);
     
     const myRef = React.createRef();
 
-    return <li key={i} className={minutesSince < NEW_MEMBER_HILIGHT_TRESHHOLD ? "new" : undefined}>
+    return <li key={i} className={minutesSince < HILIGHT_TRESHOLD_MINUTES ? "new" : undefined}>
               <div className={"chapter"}>{member.chapter} </div>
               <div className="time"> {timeSinceWords}</div>
-              {minutesSince < NEW_MEMBER_NOTIFICATION_TRESHHOLD && 
+              {minutesSince < HILIGHT_TRESHOLD_MINUTES && 
                 <audio ref={myRef} src={bikebell} autoPlay/>}
             </li>
   }
