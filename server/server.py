@@ -24,7 +24,6 @@ def setupGmailService():
 
 
 def getEmailListFromGmail(service):
-    # Call the Gmail API
     results = service.users().messages().list(userId='me').execute()
     return results.get('messages', [])
 
@@ -41,7 +40,7 @@ def isOlderThanTreshold(timestamp, hour_treshold):
     dateTime = datetime.fromtimestamp(int(timestamp)/1000)
     time_since_registration = datetime.today() - dateTime
 
-    return time_since_registration.seconds//3600 > hour_treshold
+    return time_since_registration.total_seconds()//3600 > hour_treshold
 
 
 def getMembershipDataFromEmail(messageid, service):

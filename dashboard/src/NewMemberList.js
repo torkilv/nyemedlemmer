@@ -10,7 +10,7 @@ import arildBilde from './arild.jpeg';
 var API_GET_NEW_MEMBERS_URL = "http://0.0.0.0:5000/newmembers"
 var NOTIFICATION_TRESHOLD_MINUTES = 3
 var HILIGHT_TRESHOLD_MINUTES = 60
-var SHOWN_HOURS_TRESHOLD = 10
+var SHOWN_HOURS_TRESHOLD = 24
 
 class NewMemberList extends Component {
 
