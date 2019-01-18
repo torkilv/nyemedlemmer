@@ -25,7 +25,16 @@ def setupGmailService():
 
 def getEmailListFromGmail(service):
     results = service.users().messages().list(userId='me').execute()
-    return results.get('messages', [])
+    messages = results.get('messages', [])
+
+    nextPageToken = results.get('nextPageToken', False)
+
+    while nextPageToken:
+        results = service.users().messages().list(userId='me', pageToken=nextPageToken).execute()
+        nextPageToken = results.get('nextPageToken', False)
+        messages.extend(results.get('messages',[]))
+   
+    return messages
 
 
 def getMailbodyAndTimeFromGmail(service, messageid):
