@@ -102,8 +102,16 @@ class NewMemberList extends Component {
     return (
     <div className="app">
     <h1 className="headerNumbers"> 
-      <div className="numberBox"><div className="number">{this.state.lists}</div><div className="textLarge">lister vedtatt</div> <div className="text">{timeToDeadline} igjen!</div></div>
-      <div className="numberBox"><div className="number">{this.state.new_members.length}</div> <div className="textLarge">nye medlemmer</div> <div className="text">siste 24 timer</div></div>
+      <div className="numberBox">
+        <div className="number">{this.state.lists}</div>
+        <div className="textLarge">lister vedtatt</div> 
+        <div className="text">{timeToDeadline} igjen!</div>
+      </div>
+      <div className="numberBox">
+        <div className="number">{this.state.new_members.length}</div>
+        <div className="textLarge">nye medlemmer</div>
+        <div className="text">siste 24 timer</div>
+      </div>
     </h1>
     
     {newMembersItem}
