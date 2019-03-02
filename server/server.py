@@ -24,20 +24,20 @@ SAMPLE_SPREADSHEET_ID = '14fEYPSPJaMYvoESioHXSc0DR2jjiAFOns1FErhdGKPY'
 SAMPLE_RANGE_NAME = 'Tall!D2'
 
 def setupGmailService():
-    store = file.Storage('token.json')
+    store = file.Storage('token-gmail.json')
     creds = store.get()
     
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        flow = client.flow_from_clientsecrets('credentials-gmail.json', SCOPES)
         creds = tools.run_flow(flow, store)
 
     return build('gmail', 'v1', http=creds.authorize(Http()))
 
 def setupSheetsService():
-    store = file.Storage('token.json')
+    store = file.Storage('token-sheets.json')
     creds = store.get()
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SHEET_SCOPES)
+        flow = client.flow_from_clientsecrets('credentials-sheets.json', SHEET_SCOPES)
         creds = tools.run_flow(flow, store)
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first

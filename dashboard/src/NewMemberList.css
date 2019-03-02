@@ -1,38 +1,69 @@
 h1 {
   text-align: center;
-  font-family: "MDGGothic";
+  font-family: "Avenir";
   color: #FFF;
-  font-size: 6em;
-  margin-left: 10%;
-  margin-right: 10%;
+  display: inline-block;
 }
 
+.number {
+   font-size: 5em;
+  display: inline-block;
+
+}
+
+.numberBox {
+  width: 40%
+}
+.text, .textLarge {
+  width: 100%;
+}
+
+.textLarge {
+  font-size: 1.5em;
+}
 h2 {
   text-align: center;
-  font-family: "MDGHand-Black";
+  font-family: "Avenir";
   color: #FFF;
-  font-size: 4em;
+  width: 100%;
+  font-size: 3em;
   padding-top: 0.3em;
   margin-bottom: 0px;
   margin-left: 10%;
   margin-right: 10%;
 }
+.headerNumbers {
+  display: inline-block;
+  width: 100%
+}
+
+ .number {
+   font-family: "Avenir";
+  color: #FFF;
+  font-size: 4em;
+  display: inline-block;
+   
+ }
 
 body {
       background-color: #6a9325;
-      font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
       text-align: center;
+      display: inline-block;
 }
 ul  {
   padding-inline-start: 0;
 }
 
+div {
+  display: inline-block
+}
 li {
     list-style-type: none;
     margin-bottom: 5px;
     margin-left: 10%;
     margin-right: 10%;
     color: #FFF;
+    font-family: "Avenir";
 }
 
 @media only screen and (max-device-width: 880px) {
@@ -58,14 +89,3 @@ li.new {
   font-weight: bold;
 }
 
-@font-face {
-font-family: "MDGGothic";
-src: 
-url("MDGGothic.otf") format("opentype"),
-}
-
-@font-face {
-font-family: "MDGHand-Black";
-src: 
-url("MDGHand-Black.otf") format("opentype"),
-}

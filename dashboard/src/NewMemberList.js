@@ -50,12 +50,11 @@ class NewMemberList extends Component {
   defaultPage() {
     const timeToDeadline = distanceInWords(new Date(), new Date(2019, 3, 0, 11), {locale: nblocale})
     return (
-      <div className="newLists">
-    <h1>{this.state.lists} lister på plass</h1>
-    <h2>{timeToDeadline} til fristen!</h2>
+  
       <div className="NewMemberList"><h1>STÅ PÅ, MILJØHELTER!</h1>
         <img alt="Arild på sykkel" src={arildBilde} />
-      </div></div>);
+      </div>
+    );
   }
 
   createListItemForMember(member, i) {
@@ -76,28 +75,38 @@ class NewMemberList extends Component {
             </li>
   }
 
-  render() {
-
-    if (this.state.new_members.length < 2) {
-      
-      return this.defaultPage();
-    }
-    const timeToDeadline = distanceInWords(new Date(), new Date(2019, 3, 1, 12), {locale: nblocale})
-
-    return (
-    <div className="newLists">
-    <h1>{this.state.lists} lister på plass</h1>
-    <h2>{timeToDeadline} til fristen!</h2>
-    
-    <div className="NewMemberList">
-      <h1>{this.state.new_members.length} NYE MEDLEMMER SISTE {SHOWN_HOURS_TRESHOLD} TIMER!</h1>
+  createNewMembersList() {
+    return (<div className="NewMemberList">
 
       <h2>Gratulerer med nytt medlem til:</h2>
 
       <ul>
         {this.state.new_members.map(this.createListItemForMember)}
       </ul>
-    </div>
+    </div>)
+
+  }
+
+  render() {
+
+    let newMembersItem;
+
+    if (this.state.new_members.length < 2) {
+      newMembersItem = this.defaultPage();
+    } else {
+      newMembersItem = this.createNewMembersList()
+    }
+
+    const timeToDeadline = distanceInWords(new Date(), new Date(2019, 3, 1, 12), {locale: nblocale})
+
+    return (
+    <div className="app">
+    <h1 className="headerNumbers"> 
+      <div className="numberBox"><div className="number">{this.state.lists}</div><div className="textLarge">lister vedtatt</div> <div className="text">{timeToDeadline} igjen!</div></div>
+      <div className="numberBox"><div className="number">{this.state.new_members.length}</div> <div className="textLarge">nye medlemmer</div> <div className="text">siste 24 timer</div></div>
+    </h1>
+    
+    {newMembersItem}
     </div>
     
     );
