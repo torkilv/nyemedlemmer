@@ -29,13 +29,6 @@ class NewMemberList extends Component {
         this.setState(newState);
     })
     .catch(error => console.log(error));
-
-    axios
-    .get(API_GET_LISTS_URL)
-    .then (response => {
-      const newState = {lists: response.data};
-      this.setState(newState)
-    })
   }
 
   componentDidMount() {
@@ -48,10 +41,9 @@ class NewMemberList extends Component {
   }
 
   defaultPage() {
-    const timeToDeadline = distanceInWords(new Date(), new Date(2019, 3, 0, 11), {locale: nblocale})
     return (
   
-      <div className="NewMemberList"><h1>STÅ PÅ, MILJØHELTER!</h1>
+      <div className="NewMemberList"><h2>STÅ PÅ, MILJØHELTER!</h2>
         <img alt="Arild på sykkel" src={arildBilde} />
       </div>
     );
@@ -102,11 +94,6 @@ class NewMemberList extends Component {
     return (
     <div className="app">
     <h1 className="headerNumbers"> 
-      <div className="numberBox">
-        <div className="number">{this.state.lists}</div>
-        <div className="textLarge">lister vedtatt</div> 
-        <div className="text">{timeToDeadline} igjen!</div>
-      </div>
       <div className="numberBox">
         <div className="number">{this.state.new_members.length}</div>
         <div className="textLarge">nye medlemmer</div>
