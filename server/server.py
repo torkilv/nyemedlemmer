@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from googleapiclient.discovery import build
 from httplib2 import Http
@@ -22,6 +23,9 @@ SHEET_SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '14fEYPSPJaMYvoESioHXSc0DR2jjiAFOns1FErhdGKPY'
 SAMPLE_RANGE_NAME = 'Tall!D2'
+
+DOOR_KNOCKING_SPREADSHEET_ID = '15NkVPeWOJvkDwY8tPCPhX16bDk9m2_TjU-ioGHa3LnY'
+DOOR_KNOCKING_RANGE = 'Antall husbesøk!H2:I5'
 
 def setupGmailService():
     store = file.Storage('token-gmail.json')
@@ -118,7 +122,15 @@ def getNumberOfLists():
 
     return value[0][0]
 
+def getDoorKnockingStats():
+    service = setupSheetsService()
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=DOOR_KNOCKING_SPREADSHEET_ID,
+                                range=DOOR_KNOCKING_RANGE).execute()
+    return result.get('values')
+
 if __name__ == '__main__':
+    setupSheetsService()
     server = flask.Flask(__name__)
     CORS(server)
     server.config["DEBUG"] = True
@@ -135,5 +147,9 @@ if __name__ == '__main__':
     @server.route('/lists', methods=['GET'])
     def get_number_of_lists():
         return jsonify(getNumberOfLists())
+
+    @server.route('/doors', methods=['GET'])
+    def get_door_stats():
+        return jsonify(getDoorKnockingStats())
 
     server.run()
