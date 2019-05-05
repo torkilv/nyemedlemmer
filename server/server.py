@@ -25,7 +25,8 @@ SAMPLE_SPREADSHEET_ID = '14fEYPSPJaMYvoESioHXSc0DR2jjiAFOns1FErhdGKPY'
 SAMPLE_RANGE_NAME = 'Tall!D2'
 
 DOOR_KNOCKING_SPREADSHEET_ID = '15NkVPeWOJvkDwY8tPCPhX16bDk9m2_TjU-ioGHa3LnY'
-DOOR_KNOCKING_RANGE = 'Antall husbesøk!H2:I5'
+DOOR_KNOCKING_RANGE = 'Kontakt/samtaler!J2:K9'
+FULL_RANGE = 'Kontakt/samtaler!A1:H20'
 
 def setupGmailService():
     store = file.Storage('token-gmail.json')
@@ -129,27 +130,37 @@ def getDoorKnockingStats():
                                 range=DOOR_KNOCKING_RANGE).execute()
     return result.get('values')
 
+def getFullDoorKnockingStats():
+    service = setupSheetsService()
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=DOOR_KNOCKING_SPREADSHEET_ID,
+                                range=FULL_RANGE).execute()
+    return result.get('values')
+    
+
+app = flask.Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def default():
+    return "It works"
+
+@app.route('/doors', methods=['GET'])
+def get_door_stats():
+    return jsonify(getDoorKnockingStats())
+
+@app.route('/doors/extended', methods=['GET'])
+def get_full_door_stats():
+    return jsonify(getFullDoorKnockingStats())
+
+
+CORS(app)
+
+
 if __name__ == '__main__':
+    print("Here")
     setupSheetsService()
-    server = flask.Flask(__name__)
-    CORS(server)
-    server.config["DEBUG"] = True
+    CORS(app)
+    app.config["DEBUG"] = True
 
-
-    @server.route('/newmembers', methods=['GET'])
-    def home():
-        return jsonify(getNewMembers(0))
-
-    @server.route('/newmembers/<hour_treshold>', methods=['GET'])
-    def specific_day(hour_treshold):
-        return jsonify(getNewMembers(int(hour_treshold)))
-
-    @server.route('/lists', methods=['GET'])
-    def get_number_of_lists():
-        return jsonify(getNumberOfLists())
-
-    @server.route('/doors', methods=['GET'])
-    def get_door_stats():
-        return jsonify(getDoorKnockingStats())
-
-    server.run()
+    print("Starting app")
+    app.run(host='0.0.0.0', port='5000')
