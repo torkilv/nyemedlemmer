@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './NewMemberList.css';
 import axios from 'axios';
-import distanceInWordsToNow  from 'date-fns/distance_in_words_to_now';
-import differenceInMinutes from 'date-fns/difference_in_minutes';
-import nblocale from 'date-fns/locale/nb';
+import { formatDistanceToNow } from 'date-fns';
+import { differenceInMinutes } from 'date-fns';
+import { nb as nblocale } from 'date-fns/locale';
 import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
@@ -47,7 +47,10 @@ class NewMemberList extends Component {
   }
 
   componentWillUnmount() {
-    this.timer = null;
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
   }
 
   defaultPage() {
@@ -63,7 +66,7 @@ class NewMemberList extends Component {
   createListItemForMember(member, i) {
     const signedUpTime = new Date(member.timestamp);
 
-    const timeSinceWords = "for "+distanceInWordsToNow(signedUpTime, {locale: nblocale}) + " siden";
+    const timeSinceWords = "for "+formatDistanceToNow(signedUpTime, {locale: nblocale}) + " siden";
     const minutesSince = differenceInMinutes(new Date(), signedUpTime, {locale: nblocale});
 
   

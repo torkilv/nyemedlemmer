@@ -28,7 +28,7 @@ def setupGmailService():
     creds = store.get()
     
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('token.json', SCOPES)
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
         creds = tools.run_flow(flow, store)
 
     return build('gmail', 'v1', http=creds.authorize(Http()))
@@ -65,8 +65,14 @@ def getEmailListFromGmail(service):
 
 def getMailbodyAndTimeFromGmail(service, messageid):
     if messageid not in messagesStore:
-        result = service.users().messages().get(userId="me",id=messageid).execute()
-        messagesStore[messageid] = (result.get('snippet',[]), result.get('internalDate', 0))
+        result = service.users().messages().get(userId="me",id=messageid, format='full').execute()
+        headers = result.get('payload', {}).get('headers', [])
+        subject = ''
+        for header in headers:
+            if header['name'].lower() == 'subject':
+                subject = header['value']
+                break
+        messagesStore[messageid] = (subject, result.get('internalDate', 0))
 
     return messagesStore[messageid]
 
@@ -79,12 +85,18 @@ def isOlderThanTreshold(timestamp, hour_treshold):
 
 
 def getMembershipDataFromEmail(messageid, service):
-    mailBody, registeredTime = getMailbodyAndTimeFromGmail(service, messageid)
+    subject, registeredTime = getMailbodyAndTimeFromGmail(service, messageid)
 
-    if not "meldt seg inn i" in mailBody:
+    # New format: "Nytt medlem i [lokallag]" - chapter name is the 4th word
+    if not "Nytt medlem i" in subject:
         return False
 
-    chapter = mailBody.split("meldt seg inn i ")[1].split(". L")[0]
+    # Extract lokallag as the 4th word (index 3)
+    words = subject.split()
+    if len(words) < 4:
+        return False
+    
+    chapter = words[3]
 
     return {
         "chapter": chapter, 
@@ -114,10 +126,10 @@ def getActions():
     sheets = service.spreadsheets()
     result = sheets.get(spreadsheetId=SAMPLE_SPREADSHEET_ID).execute()
     
-    print(result.get(u'sheets')[0].get(u'properties'))
-
-
-    return 0
+    # Return the number of sheets in the spreadsheet
+    # This matches the route name 'get_number_of_lists'
+    sheet_count = len(result.get('sheets', []))
+    return {'count': sheet_count, 'sheets': [sheet.get('properties', {}).get('title', '') for sheet in result.get('sheets', [])]}
 
 if __name__ == '__main__':
     server = flask.Flask(__name__)
