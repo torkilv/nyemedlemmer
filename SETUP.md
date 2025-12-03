@@ -37,11 +37,16 @@ You need to set up two secrets in your GitHub repository:
        5. Add it as the `GMAIL_TOKEN` secret
      - After setup, the token will be automatically refreshed by the workflow
 
-### 3. Enable GitHub Pages
+### 3. Enable GitHub Pages (REQUIRED - Do this first!)
 
-1. Go to your repository → Settings → Pages
-2. Under "Source", select "GitHub Actions" as the source
-3. The deployment will happen automatically when you push to the `master` branch
+**⚠️ IMPORTANT:** The deployment workflow will fail until GitHub Pages is enabled!
+
+1. Go to your repository on GitHub: `https://github.com/YOUR_USERNAME/nyemedlemmer`
+2. Navigate to **Settings** → **Pages**
+3. Under **"Build and deployment"** → **"Source"**, select **"GitHub Actions"**
+4. The deployment will happen automatically when you push to the `master` branch
+
+**Note:** After enabling GitHub Pages, you may need to trigger the workflow manually the first time (go to Actions tab → Deploy to GitHub Pages → Run workflow)
 
 ### 4. Adjust Cron Schedule (Optional)
 
