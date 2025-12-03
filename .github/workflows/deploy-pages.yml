@@ -60,13 +60,17 @@ jobs:
         path: './dashboard/build'
       continue-on-error: false
       
-    - name: Verify artifact upload
-      run: |
-        echo "✓ Artifact uploaded successfully!"
-        echo ""
-        echo "Next steps:"
-        echo "1. Check the 'pages-build-deployment' workflow in the Actions tab"
-        echo "2. It should automatically run after this workflow completes"
-        echo "3. Wait 1-2 minutes after pages-build-deployment completes for the site to update"
-        echo "4. Verify GitHub Pages is enabled: Settings → Pages → Source = 'GitHub Actions'"
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
