@@ -24,4 +24,11 @@ yarn-error.log*
 #local credentials
 credentials.json
 token.json
+token-gmail.json
+token-sheets.json
+token.pickle
+server/credentials.json
+server/token-gmail.json
+server/token-sheets.json
+server/token.pickle
 .gitignore

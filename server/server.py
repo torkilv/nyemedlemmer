@@ -20,15 +20,15 @@ messagesStore= {}
 SHEET_SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '14fEYPSPJaMYvoESioHXSc0DR2jjiAFOns1FErhdGKPY'
-SAMPLE_RANGE_NAME = 'Tall!D2'
+SAMPLE_SPREADSHEET_ID = '1KsEPEC4xwlTlTKugxX-IgfZ9jGE9Z6TdOVx_mYIDheM'
+SAMPLE_RANGE_NAME = 'Rapport husbesk'
 
 def setupGmailService():
     store = file.Storage('token-gmail.json')
     creds = store.get()
     
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials-gmail.json', SCOPES)
+        flow = client.flow_from_clientsecrets('token.json', SCOPES)
         creds = tools.run_flow(flow, store)
 
     return build('gmail', 'v1', http=creds.authorize(Http()))
@@ -37,7 +37,7 @@ def setupSheetsService():
     store = file.Storage('token-sheets.json')
     creds = store.get()
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials-sheets.json', SHEET_SCOPES)
+        flow = client.flow_from_clientsecrets('credentials.json', SHEET_SCOPES)
         creds = tools.run_flow(flow, store)
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -109,14 +109,15 @@ def getNewMembers(hour_treshold):
 
     return new_memberships
 
-def getNumberOfLists():
+def getActions():
     service = setupSheetsService()
-    sheet = service.spreadsheets()
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                range=SAMPLE_RANGE_NAME).execute()
-    value = result.get('values', [[-1]])
+    sheets = service.spreadsheets()
+    result = sheets.get(spreadsheetId=SAMPLE_SPREADSHEET_ID).execute()
+    
+    print(result.get(u'sheets')[0].get(u'properties'))
 
-    return value[0][0]
+
+    return 0
 
 if __name__ == '__main__':
     server = flask.Flask(__name__)
@@ -132,8 +133,8 @@ if __name__ == '__main__':
     def specific_day(hour_treshold):
         return jsonify(getNewMembers(int(hour_treshold)))
 
-    @server.route('/lists', methods=['GET'])
+    @server.route('/actions', methods=['GET'])
     def get_number_of_lists():
-        return jsonify(getNumberOfLists())
+        return jsonify(getActions())
 
     server.run()

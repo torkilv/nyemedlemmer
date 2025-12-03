@@ -7,7 +7,7 @@ import nblocale from 'date-fns/locale/nb';
 import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
-var API_GET_NEW_MEMBERS_URL = "http://pling.mdg.no:5000/newmembers"
+var API_GET_NEW_MEMBERS_URL = "/newmembers.json"
 var NOTIFICATION_TRESHOLD_MINUTES = 3
 var HILIGHT_TRESHOLD_MINUTES = 60
 var SHOWN_HOURS_TRESHOLD = 24
@@ -22,12 +22,23 @@ class NewMemberList extends Component {
 
   getItems() {
     axios
-    .get(API_GET_NEW_MEMBERS_URL+"/" + SHOWN_HOURS_TRESHOLD)
+    .get(API_GET_NEW_MEMBERS_URL)
     .then( response =>  {
-        const newState = {new_members: response.data, response: true};
+        // Filter by hour threshold on client side
+        const now = new Date();
+        const filtered = response.data.filter(member => {
+          const memberTime = new Date(parseInt(member.timestamp));
+          const hoursDiff = (now - memberTime) / (1000 * 60 * 60);
+          return hoursDiff <= SHOWN_HOURS_TRESHOLD;
+        });
+        const newState = {new_members: filtered, response: true};
         this.setState(newState);
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+      // If file doesn't exist yet, set empty state
+      this.setState({new_members: [], response: true});
+    });
   }
 
   componentDidMount() {
@@ -73,8 +84,8 @@ class NewMemberList extends Component {
     <h1 className="headerNumbers"> 
       <div className="numberBox">
         <div className="number">{this.state.new_members.length}</div>
-        <div className="textLarge">nye medlemmer</div>
-        <div className="text">siste 24 timer</div>
+        <div className="textLarge new">nye medlemmer</div>
+        <div className="text">siste {SHOWN_HOURS_TRESHOLD} timer</div>
       </div>
     </h1>
 
