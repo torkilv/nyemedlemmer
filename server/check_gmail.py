@@ -79,26 +79,69 @@ def setupGmailService():
     sys.stdout.flush()
     return service
 
-def getEmailListFromGmail(service):
-    """Get list of all email messages."""
-    print("Fetching email list from Gmail...")
-    results = service.users().messages().list(userId='me').execute()
-    messages = results.get('messages', [])
-    print(f"Found {len(messages)} messages in first page")
+def getEmailListFromGmail(service, after_date=None):
+    """Get list of email messages, optionally filtered by date.
+    
+    Args:
+        service: Gmail API service object
+        after_date: datetime object - only fetch emails after this date
+    """
+    import sys
+    from datetime import datetime
+    
+    # Build query string for date filter
+    query = None
+    if after_date:
+        # Gmail query format: after:YYYY/MM/DD
+        date_str = after_date.strftime('%Y/%m/%d')
+        query = f'after:{date_str}'
+        print(f"    Filtering emails after {date_str}...", flush=True)
+        sys.stdout.flush()
+    else:
+        print("    Making API call to list messages (no date filter)...", flush=True)
+        sys.stdout.flush()
+    
+    try:
+        # Make API call with query filter
+        if query:
+            results = service.users().messages().list(userId='me', q=query).execute()
+        else:
+            results = service.users().messages().list(userId='me').execute()
+        
+        messages = results.get('messages', [])
+        print(f"    Found {len(messages)} messages in first page", flush=True)
+        sys.stdout.flush()
 
-    nextPageToken = results.get('nextPageToken', False)
-    page_count = 1
-
-    while nextPageToken:
-        page_count += 1
-        print(f"Fetching page {page_count}...")
-        results = service.users().messages().list(userId='me', pageToken=nextPageToken).execute()
         nextPageToken = results.get('nextPageToken', False)
-        messages.extend(results.get('messages', []))
-        print(f"Total messages so far: {len(messages)}")
+        page_count = 1
+        max_pages = 10  # Limit to prevent infinite loops
 
-    print(f"✓ Retrieved {len(messages)} total messages")
-    return messages
+        while nextPageToken and page_count < max_pages:
+            page_count += 1
+            print(f"    Fetching page {page_count}...", flush=True)
+            sys.stdout.flush()
+            if query:
+                results = service.users().messages().list(userId='me', q=query, pageToken=nextPageToken).execute()
+            else:
+                results = service.users().messages().list(userId='me', pageToken=nextPageToken).execute()
+            nextPageToken = results.get('nextPageToken', False)
+            messages.extend(results.get('messages', []))
+            print(f"    Total messages so far: {len(messages)}", flush=True)
+            sys.stdout.flush()
+
+        if page_count >= max_pages:
+            print(f"    ⚠ Reached max pages limit ({max_pages}), stopping", flush=True)
+            sys.stdout.flush()
+
+        print(f"    ✓ Retrieved {len(messages)} total messages", flush=True)
+        sys.stdout.flush()
+        return messages
+    except Exception as e:
+        print(f"    ERROR in getEmailListFromGmail: {type(e).__name__}: {e}", flush=True)
+        sys.stdout.flush()
+        import traceback
+        traceback.print_exc()
+        raise
 
 def getMailbodyAndTimeFromGmail(service, messageid):
     """Get email subject and timestamp, with caching."""
@@ -143,20 +186,44 @@ def getMembershipDataFromEmail(messageid, service):
 
 def getNewMembers(hour_treshold=24):
     """Get new members from Gmail within the hour threshold."""
+    import sys
+    from datetime import datetime, timedelta
+    
+    print("  Getting email list from Gmail...", flush=True)
+    sys.stdout.flush()
     service = setupGmailService()
+    
+    # Only fetch emails from December 3rd, 2024 onwards
+    # This significantly reduces the number of emails to process
+    cutoff_date = datetime(2025, 12, 3)
+    print(f"  Fetching emails after {cutoff_date.strftime('%Y-%m-%d')}...", flush=True)
+    sys.stdout.flush()
+    email_list = getEmailListFromGmail(service, after_date=cutoff_date)
+    print(f"  Processing {len(email_list)} emails...", flush=True)
+    sys.stdout.flush()
     new_memberships = []
-
-    for email in getEmailListFromGmail(service):
+    
+    processed = 0
+    for email in email_list:
+        processed += 1
+        if processed % 100 == 0:
+            print(f"  Processed {processed} emails, found {len(new_memberships)} members so far...", flush=True)
+            sys.stdout.flush()
+        
         membershipData = getMembershipDataFromEmail(email["id"], service)
 
         if not membershipData:
             continue
 
         if isOlderThanTreshold(membershipData["timestamp"], hour_treshold):
+            print(f"  Reached threshold, stopping at email {processed}...", flush=True)
+            sys.stdout.flush()
             break
 
         new_memberships.append(membershipData)
-
+    
+    print(f"  ✓ Processed {processed} emails, found {len(new_memberships)} new members", flush=True)
+    sys.stdout.flush()
     return new_memberships
 
 if __name__ == '__main__':
