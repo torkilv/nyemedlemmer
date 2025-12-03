@@ -33,11 +33,29 @@ def setupGmailService():
             print("ERROR: token-gmail.json not found or invalid.")
             print("Please run this script locally first to generate the token,")
             print("then add the token-gmail.json contents as GMAIL_TOKEN secret.")
+            print("If the token expired, regenerate it locally and update the secret.")
             exit(1)
         
         # Local development: interactive OAuth flow
         flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
         creds = tools.run_flow(flow, store)
+    
+    # Check if token needs refresh
+    if creds.access_token_expired:
+        print("Token expired, attempting to refresh...")
+        try:
+            creds.refresh(Http())
+            store.put(creds)
+            print("Token refreshed successfully.")
+        except Exception as e:
+            print(f"ERROR: Failed to refresh token: {e}")
+            if os.getenv('GITHUB_ACTIONS'):
+                print("Please regenerate the token locally and update GMAIL_TOKEN secret.")
+                exit(1)
+            else:
+                # Local: re-authenticate
+                flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+                creds = tools.run_flow(flow, store)
 
     return build('gmail', 'v1', http=creds.authorize(Http()))
 

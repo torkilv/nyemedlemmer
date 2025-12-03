@@ -28,16 +28,29 @@ jobs:
       env:
         GMAIL_CREDENTIALS: ${{ secrets.GMAIL_CREDENTIALS }}
         GMAIL_TOKEN: ${{ secrets.GMAIL_TOKEN }}
+        GITHUB_ACTIONS: true
       working-directory: ./server
       run: |
         # Create credentials file from secret
-        echo "$GMAIL_CREDENTIALS" > credentials.json
-        # Create token file from secret if it exists
-        if [ -n "$GMAIL_TOKEN" ]; then
-          echo "$GMAIL_TOKEN" > token-gmail.json
+        if [ -z "$GMAIL_CREDENTIALS" ]; then
+          echo "ERROR: GMAIL_CREDENTIALS secret is not set"
+          exit 1
         fi
-        # Run the Gmail checker script
-        python check_gmail.py
+        echo "$GMAIL_CREDENTIALS" > credentials.json
+        
+        # Create token file from secret if it exists
+        if [ -z "$GMAIL_TOKEN" ]; then
+          echo "ERROR: GMAIL_TOKEN secret is not set"
+          echo "Please generate the token locally and add it as a secret."
+          exit 1
+        fi
+        echo "$GMAIL_TOKEN" > token-gmail.json
+        
+        # Run the Gmail checker script with timeout
+        timeout 300 python check_gmail.py || {
+          echo "ERROR: Script timed out or failed"
+          exit 1
+        }
         
     - name: Commit and push if data changed
       run: |
