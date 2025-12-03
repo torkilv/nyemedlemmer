@@ -114,5 +114,13 @@ To test locally:
 - **Workflow fails with "credentials.json not found"**: Make sure you've set the `GMAIL_CREDENTIALS` secret
 - **OAuth errors**: The first run may require manual OAuth approval. Check workflow logs for authorization URL
 - **No data showing**: Check that the Gmail checker workflow is running successfully and updating the JSON file
-- **Pages not deploying**: Make sure GitHub Pages is enabled and set to use "GitHub Actions" as the source
+- **Pages showing 404 or blank page**:
+  1. Verify GitHub Pages is enabled: Go to Settings → Pages → Source should be "GitHub Actions"
+  2. Check Actions tab: Look for "Deploy to GitHub Pages" workflow - it should complete successfully
+  3. Check for "pages-build-deployment" workflow - this is automatically created by GitHub and should run after your workflow uploads the artifact
+  4. Wait 1-2 minutes after deployment completes for the site to update
+  5. Clear browser cache or try incognito mode
+  6. Verify the URL: Should be `https://torkilv.github.io/nyemedlemmer/` (with trailing slash)
+  7. Check the workflow logs: The "Verify build output" step should show `index.html exists`
+  8. If still 404, check the "pages-build-deployment" workflow logs to see if the artifact was deployed correctly
 

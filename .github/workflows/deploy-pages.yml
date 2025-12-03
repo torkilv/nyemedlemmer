@@ -47,6 +47,9 @@ jobs:
         echo ""
         echo "Checking for index.html:"
         test -f dashboard/build/index.html && echo "✓ index.html exists" || echo "✗ index.html missing"
+        echo ""
+        echo "File structure:"
+        find dashboard/build -type f -name "*.html" -o -name "*.js" -o -name "*.css" | head -10
       
     - name: Setup Pages
       uses: actions/configure-pages@v4
@@ -55,4 +58,9 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: './dashboard/build'
+      continue-on-error: false
+      
+    - name: Verify artifact upload
+      run: |
+        echo "Artifact should have been uploaded. Check the 'pages-build-deployment' workflow to verify deployment."
 

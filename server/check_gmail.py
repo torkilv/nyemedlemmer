@@ -17,8 +17,13 @@ messagesStore = {}
 
 def setupGmailService():
     """Set up and return Gmail service."""
+    print("  Loading token from token-gmail.json...", flush=True)
+    import sys
+    sys.stdout.flush()
     store = file.Storage('token-gmail.json')
     creds = store.get()
+    print(f"  Token loaded: {creds is not None}, invalid: {creds.invalid if creds else 'N/A'}", flush=True)
+    sys.stdout.flush()
     
     if not creds or creds.invalid:
         if not os.path.exists('credentials.json'):
@@ -41,23 +46,38 @@ def setupGmailService():
         creds = tools.run_flow(flow, store)
     
     # Check if token needs refresh
-    if creds.access_token_expired:
-        print("Token expired, attempting to refresh...")
+    print("  Checking if token needs refresh...", flush=True)
+    import sys
+    sys.stdout.flush()
+    if hasattr(creds, 'access_token_expired') and creds.access_token_expired:
+        print("  Token expired, attempting to refresh...", flush=True)
+        sys.stdout.flush()
         try:
             creds.refresh(Http())
             store.put(creds)
-            print("Token refreshed successfully.")
+            print("  ✓ Token refreshed successfully.", flush=True)
+            sys.stdout.flush()
         except Exception as e:
-            print(f"ERROR: Failed to refresh token: {e}")
+            print(f"  ERROR: Failed to refresh token: {e}", flush=True)
+            sys.stdout.flush()
             if os.getenv('GITHUB_ACTIONS'):
-                print("Please regenerate the token locally and update GMAIL_TOKEN secret.")
+                print("Please regenerate the token locally and update GMAIL_TOKEN secret.", flush=True)
+                sys.stdout.flush()
                 exit(1)
             else:
                 # Local: re-authenticate
                 flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
                 creds = tools.run_flow(flow, store)
+    else:
+        print("  Token is valid, no refresh needed.", flush=True)
+        sys.stdout.flush()
 
-    return build('gmail', 'v1', http=creds.authorize(Http()))
+    print("  Building Gmail service...", flush=True)
+    sys.stdout.flush()
+    service = build('gmail', 'v1', http=creds.authorize(Http()))
+    print("  ✓ Gmail service ready.", flush=True)
+    sys.stdout.flush()
+    return service
 
 def getEmailListFromGmail(service):
     """Get list of all email messages."""
@@ -140,12 +160,18 @@ def getNewMembers(hour_treshold=24):
     return new_memberships
 
 if __name__ == '__main__':
-    print("Starting Gmail check...")
+    import sys
+    print("Starting Gmail check...", flush=True)
+    sys.stdout.flush()
     try:
-        print("Setting up Gmail service...")
+        print("Setting up Gmail service...", flush=True)
+        sys.stdout.flush()
         # Get new members from last 24 hours
+        print("Calling getNewMembers(24)...", flush=True)
+        sys.stdout.flush()
         new_members = getNewMembers(24)
-        print(f"Retrieved {len(new_members)} new members")
+        print(f"Retrieved {len(new_members)} new members", flush=True)
+        sys.stdout.flush()
         
         # Sort by timestamp (newest first)
         new_members.sort(key=lambda x: x['timestamp'], reverse=True)
