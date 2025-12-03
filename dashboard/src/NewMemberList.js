@@ -7,7 +7,7 @@ import { nb as nblocale } from 'date-fns/locale';
 import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
-var API_GET_NEW_MEMBERS_URL = "/newmembers.json"
+var API_GET_NEW_MEMBERS_URL = process.env.PUBLIC_URL + "/newmembers.json"
 var NOTIFICATION_TRESHOLD_MINUTES = 3
 var HILIGHT_TRESHOLD_MINUTES = 60
 var SHOWN_HOURS_TRESHOLD = 24
