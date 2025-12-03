@@ -31,26 +31,43 @@ jobs:
         GITHUB_ACTIONS: true
       working-directory: ./server
       run: |
+        set -e  # Exit on error
+        echo "Starting Gmail check..."
+        
         # Create credentials file from secret
+        echo "Checking GMAIL_CREDENTIALS..."
         if [ -z "$GMAIL_CREDENTIALS" ]; then
           echo "ERROR: GMAIL_CREDENTIALS secret is not set"
           exit 1
         fi
         echo "$GMAIL_CREDENTIALS" > credentials.json
+        echo "✓ Credentials file created"
         
-        # Create token file from secret if it exists
+        # Create token file from secret
+        echo "Checking GMAIL_TOKEN..."
         if [ -z "$GMAIL_TOKEN" ]; then
           echo "ERROR: GMAIL_TOKEN secret is not set"
           echo "Please generate the token locally and add it as a secret."
           exit 1
         fi
         echo "$GMAIL_TOKEN" > token-gmail.json
+        echo "✓ Token file created"
         
-        # Run the Gmail checker script with timeout
+        # Verify files exist
+        echo "Verifying files..."
+        ls -la credentials.json token-gmail.json
+        
+        # Run the Gmail checker script with timeout and better error handling
+        echo "Running Gmail checker script..."
         timeout 300 python check_gmail.py || {
-          echo "ERROR: Script timed out or failed"
+          EXIT_CODE=$?
+          echo "ERROR: Script failed with exit code $EXIT_CODE"
+          if [ $EXIT_CODE -eq 124 ]; then
+            echo "Script timed out after 5 minutes"
+          fi
           exit 1
         }
+        echo "✓ Gmail check completed successfully"
         
     - name: Commit and push if data changed
       run: |

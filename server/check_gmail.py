@@ -61,16 +61,23 @@ def setupGmailService():
 
 def getEmailListFromGmail(service):
     """Get list of all email messages."""
+    print("Fetching email list from Gmail...")
     results = service.users().messages().list(userId='me').execute()
     messages = results.get('messages', [])
+    print(f"Found {len(messages)} messages in first page")
 
     nextPageToken = results.get('nextPageToken', False)
+    page_count = 1
 
     while nextPageToken:
+        page_count += 1
+        print(f"Fetching page {page_count}...")
         results = service.users().messages().list(userId='me', pageToken=nextPageToken).execute()
         nextPageToken = results.get('nextPageToken', False)
         messages.extend(results.get('messages', []))
+        print(f"Total messages so far: {len(messages)}")
 
+    print(f"✓ Retrieved {len(messages)} total messages")
     return messages
 
 def getMailbodyAndTimeFromGmail(service, messageid):
@@ -133,21 +140,31 @@ def getNewMembers(hour_treshold=24):
     return new_memberships
 
 if __name__ == '__main__':
-    # Get new members from last 24 hours
-    new_members = getNewMembers(24)
-    
-    # Sort by timestamp (newest first)
-    new_members.sort(key=lambda x: x['timestamp'], reverse=True)
-    
-    # Save to JSON file in the dashboard public directory
-    # Handle both relative paths (local) and absolute paths (GitHub Actions)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_root = os.path.dirname(script_dir)
-    output_path = os.path.join(repo_root, 'dashboard', 'public', 'newmembers.json')
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(new_members, f, indent=2, ensure_ascii=False)
-    
-    print(f"Found {len(new_members)} new members. Data saved to {output_path}")
+    print("Starting Gmail check...")
+    try:
+        print("Setting up Gmail service...")
+        # Get new members from last 24 hours
+        new_members = getNewMembers(24)
+        print(f"Retrieved {len(new_members)} new members")
+        
+        # Sort by timestamp (newest first)
+        new_members.sort(key=lambda x: x['timestamp'], reverse=True)
+        
+        # Save to JSON file in the dashboard public directory
+        # Handle both relative paths (local) and absolute paths (GitHub Actions)
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        repo_root = os.path.dirname(script_dir)
+        output_path = os.path.join(repo_root, 'dashboard', 'public', 'newmembers.json')
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        
+        print(f"Saving data to {output_path}...")
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(new_members, f, indent=2, ensure_ascii=False)
+        
+        print(f"✓ Found {len(new_members)} new members. Data saved to {output_path}")
+    except Exception as e:
+        print(f"ERROR: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        exit(1)
 
