@@ -243,11 +243,11 @@ if __name__ == '__main__':
         # Sort by timestamp (newest first)
         new_members.sort(key=lambda x: x['timestamp'], reverse=True)
         
-        # Save to JSON file in the dashboard public directory
-        # Handle both relative paths (local) and absolute paths (GitHub Actions)
+        # Save to JSON file in docs/ directory (served directly by GitHub Pages)
+        # This way the file can be updated without rebuilding the React app
         script_dir = os.path.dirname(os.path.abspath(__file__))
         repo_root = os.path.dirname(script_dir)
-        output_path = os.path.join(repo_root, 'dashboard', 'public', 'newmembers.json')
+        output_path = os.path.join(repo_root, 'docs', 'newmembers.json')
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         
         print(f"Saving data to {output_path}...")

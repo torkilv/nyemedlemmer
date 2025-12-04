@@ -7,8 +7,9 @@ import { nb as nblocale } from 'date-fns/locale';
 import bikebell from './bikebell.mp3';
 import arildBilde from './arild.jpeg';
 
-// Use PUBLIC_URL for GitHub Pages subdirectory, fallback to empty for local dev
-var API_GET_NEW_MEMBERS_URL = (process.env.PUBLIC_URL || '') + "/newmembers.json"
+// Fetch from GitHub raw content API - no rebuild needed when JSON updates
+// The file is stored in docs/ and served directly from the repository
+var API_GET_NEW_MEMBERS_URL = "https://raw.githubusercontent.com/torkilv/nyemedlemmer/master/docs/newmembers.json"
 var NOTIFICATION_TRESHOLD_MINUTES = 3
 var HILIGHT_TRESHOLD_MINUTES = 60
 var SHOWN_HOURS_TRESHOLD = 24
@@ -25,18 +26,24 @@ class NewMemberList extends Component {
     axios
     .get(API_GET_NEW_MEMBERS_URL)
     .then( response =>  {
+        console.log('Fetched data:', response.data.length, 'members');
         // Filter by hour threshold on client side
         const now = new Date();
         const filtered = response.data.filter(member => {
           const memberTime = new Date(parseInt(member.timestamp));
           const hoursDiff = (now - memberTime) / (1000 * 60 * 60);
-          return hoursDiff <= SHOWN_HOURS_TRESHOLD;
+          const shouldInclude = hoursDiff <= SHOWN_HOURS_TRESHOLD;
+          if (!shouldInclude) {
+            console.log(`Filtered out ${member.chapter}: ${hoursDiff.toFixed(2)} hours ago`);
+          }
+          return shouldInclude;
         });
+        console.log('After filtering:', filtered.length, 'members');
         const newState = {new_members: filtered, response: true};
         this.setState(newState);
     })
     .catch(error => {
-      console.log(error);
+      console.error('Error fetching members:', error);
       // If file doesn't exist yet, set empty state
       this.setState({new_members: [], response: true});
     });

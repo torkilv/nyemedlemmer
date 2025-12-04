@@ -9,6 +9,8 @@ on:
 jobs:
   check-gmail:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
     - name: Checkout repository
@@ -73,6 +75,15 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add dashboard/public/newmembers.json
-        git diff --staged --quiet || (git commit -m "Update new members data [skip ci]" && git push)
+        git add docs/newmembers.json
+        if ! git diff --staged --quiet; then
+          echo "Changes detected, committing..."
+          git commit -m "Update new members data"
+          git push
+          echo "✓ Changes committed and pushed"
+          echo "Note: JSON file is now available at /docs/newmembers.json"
+          echo "The client polls every 3 minutes and will pick up the new data immediately"
+        else
+          echo "No changes to commit"
+        fi
 
