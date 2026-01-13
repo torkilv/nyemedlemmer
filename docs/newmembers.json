@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "chapter": "Gamle",
+    "timestamp": 1768293020000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1768293019000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1768293018000
+  },
+  {
+    "chapter": "Vestre",
+    "timestamp": 1768293017000
+  },
+  {
+    "chapter": "Nesodden",
+    "timestamp": 1768293015000
+  },
+  {
+    "chapter": "St.",
+    "timestamp": 1768293014000
+  },
+  {
+    "chapter": "Oslo",
+    "timestamp": 1768293013000
+  }
+]
