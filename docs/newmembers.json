@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "chapter": "Kvinnherad",
+    "timestamp": 1769414120000
+  },
+  {
+    "chapter": "Frogner",
+    "timestamp": 1769414119000
+  },
+  {
+    "chapter": "Innlandet",
+    "timestamp": 1769414118000
+  },
+  {
+    "chapter": "Lindesnes",
+    "timestamp": 1769414117000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1769414115000
+  },
+  {
+    "chapter": "Vestby",
+    "timestamp": 1769414114000
+  },
+  {
+    "chapter": "Arendal",
+    "timestamp": 1769414113000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1769414112000
+  },
+  {
+    "chapter": "Gamle",
+    "timestamp": 1769414111000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1769414109000
+  },
+  {
+    "chapter": "Holmestrand",
+    "timestamp": 1769414108000
+  }
+]
