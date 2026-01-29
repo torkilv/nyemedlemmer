@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "chapter": "Grimstad",
+    "timestamp": 1769690445000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1769690444000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1769690443000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1769690442000
+  },
+  {
+    "chapter": "Nesodden",
+    "timestamp": 1769690440000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1769690439000
+  },
+  {
+    "chapter": "Eidsvoll",
+    "timestamp": 1769690438000
+  },
+  {
+    "chapter": "Lier",
+    "timestamp": 1769690436000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1769690435000
+  },
+  {
+    "chapter": "Asker",
+    "timestamp": 1769690434000
+  },
+  {
+    "chapter": "Nord-Østerdal",
+    "timestamp": 1769690433000
+  },
+  {
+    "chapter": "Kristiansand",
+    "timestamp": 1769690431000
+  },
+  {
+    "chapter": "Kongsberg",
+    "timestamp": 1769690430000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1769690429000
+  },
+  {
+    "chapter": "Kragerø",
+    "timestamp": 1769690427000
+  },
+  {
+    "chapter": "Alna",
+    "timestamp": 1769690426000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1769690425000
+  },
+  {
+    "chapter": "Kristiansand",
+    "timestamp": 1769690424000
+  },
+  {
+    "chapter": "Lillestrøm",
+    "timestamp": 1769690421000
+  },
+  {
+    "chapter": "Ålesund",
+    "timestamp": 1769690420000
+  }
+]
