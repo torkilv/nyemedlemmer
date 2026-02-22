@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "chapter": "Lillesand",
+    "timestamp": 1771767016000
+  },
+  {
+    "chapter": "Bærum",
+    "timestamp": 1771767015000
+  },
+  {
+    "chapter": "Sortland",
+    "timestamp": 1771767014000
+  },
+  {
+    "chapter": "Tromsø",
+    "timestamp": 1771767013000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1771767012000
+  }
+]
