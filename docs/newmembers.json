@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "chapter": "Tønsberg",
+    "timestamp": 1773918015000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1773918014000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1773918013000
+  },
+  {
+    "chapter": "Karmøy",
+    "timestamp": 1773918012000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1773918010000
+  },
+  {
+    "chapter": "Indre",
+    "timestamp": 1773918009000
+  }
+]
