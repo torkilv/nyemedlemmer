@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "chapter": "Lillesand",
+    "timestamp": 1774533315000
+  },
+  {
+    "chapter": "Søndre",
+    "timestamp": 1774533314000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1774533312000
+  },
+  {
+    "chapter": "Nordstrand",
+    "timestamp": 1774533311000
+  },
+  {
+    "chapter": "Lørenskog",
+    "timestamp": 1774533310000
+  },
+  {
+    "chapter": "Kongsberg",
+    "timestamp": 1774533308000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1774533307000
+  }
+]
