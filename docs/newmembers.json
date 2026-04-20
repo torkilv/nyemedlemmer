@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "chapter": "Sogndal",
+    "timestamp": 1776671716000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1776671714000
+  },
+  {
+    "chapter": "Nome",
+    "timestamp": 1776671713000
+  },
+  {
+    "chapter": "Eidsvoll",
+    "timestamp": 1776671712000
+  },
+  {
+    "chapter": "Tromsø",
+    "timestamp": 1776671711000
+  },
+  {
+    "chapter": "Råde",
+    "timestamp": 1776671710000
+  }
+]
