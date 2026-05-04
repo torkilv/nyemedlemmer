@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "chapter": "Bærum",
+    "timestamp": 1777880418000
+  },
+  {
+    "chapter": "Harstad",
+    "timestamp": 1777880417000
+  },
+  {
+    "chapter": "Kongsvingerregionen",
+    "timestamp": 1777880415000
+  },
+  {
+    "chapter": "Sagene",
+    "timestamp": 1777880414000
+  },
+  {
+    "chapter": "Arendal",
+    "timestamp": 1777880413000
+  },
+  {
+    "chapter": "Sortland",
+    "timestamp": 1777880412000
+  },
+  {
+    "chapter": "Sortland",
+    "timestamp": 1777880411000
+  },
+  {
+    "chapter": "Moss",
+    "timestamp": 1777880410000
+  }
+]
