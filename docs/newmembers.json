@@ -1,14 +1,30 @@
 [
   {
-    "chapter": "Sarpsborg",
-    "timestamp": 1777965912000
+    "chapter": "Fredrikstad",
+    "timestamp": 1778056520000
   },
   {
-    "chapter": "Nesodden",
-    "timestamp": 1777965911000
+    "chapter": "Nordre",
+    "timestamp": 1778056519000
   },
   {
-    "chapter": "Bærum",
-    "timestamp": 1777965910000
+    "chapter": "Nordstrand",
+    "timestamp": 1778056517000
+  },
+  {
+    "chapter": "Vestre",
+    "timestamp": 1778056516000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1778056515000
+  },
+  {
+    "chapter": "Askøy",
+    "timestamp": 1778056514000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1778056512000
   }
 ]
