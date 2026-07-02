@@ -1,1 +1,262 @@
-[]
+[
+  {
+    "chapter": "Kristiansand",
+    "timestamp": 1783017374000
+  },
+  {
+    "chapter": "Østensjø",
+    "timestamp": 1783017373000
+  },
+  {
+    "chapter": "Nordstrand",
+    "timestamp": 1783017371000
+  },
+  {
+    "chapter": "Klepp",
+    "timestamp": 1783017369000
+  },
+  {
+    "chapter": "Stad",
+    "timestamp": 1783017368000
+  },
+  {
+    "chapter": "Nesodden",
+    "timestamp": 1783017366000
+  },
+  {
+    "chapter": "Stad",
+    "timestamp": 1783017364000
+  },
+  {
+    "chapter": "Stad",
+    "timestamp": 1783017360000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1783017359000
+  },
+  {
+    "chapter": "Asker",
+    "timestamp": 1783017357000
+  },
+  {
+    "chapter": "Horten",
+    "timestamp": 1783017356000
+  },
+  {
+    "chapter": "Stovner",
+    "timestamp": 1783017354000
+  },
+  {
+    "chapter": "Moss",
+    "timestamp": 1783017353000
+  },
+  {
+    "chapter": "Lillehammer",
+    "timestamp": 1783017351000
+  },
+  {
+    "chapter": "Tromsø",
+    "timestamp": 1783017350000
+  },
+  {
+    "chapter": "Bjerke",
+    "timestamp": 1783017348000
+  },
+  {
+    "chapter": "Østensjø",
+    "timestamp": 1783017347000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1783017345000
+  },
+  {
+    "chapter": "Alna",
+    "timestamp": 1783017344000
+  },
+  {
+    "chapter": "Stord",
+    "timestamp": 1783017342000
+  },
+  {
+    "chapter": "Østensjø",
+    "timestamp": 1783017341000
+  },
+  {
+    "chapter": "Frogner",
+    "timestamp": 1783017339000
+  },
+  {
+    "chapter": "Nesodden",
+    "timestamp": 1783017338000
+  },
+  {
+    "chapter": "Fredrikstad",
+    "timestamp": 1783017337000
+  },
+  {
+    "chapter": "Fredrikstad",
+    "timestamp": 1783017335000
+  },
+  {
+    "chapter": "Alna",
+    "timestamp": 1783017334000
+  },
+  {
+    "chapter": "Porsgrunn",
+    "timestamp": 1783017333000
+  },
+  {
+    "chapter": "Larvik",
+    "timestamp": 1783017331000
+  },
+  {
+    "chapter": "Kongsberg",
+    "timestamp": 1783017330000
+  },
+  {
+    "chapter": "Skien",
+    "timestamp": 1783017328000
+  },
+  {
+    "chapter": "Kongsberg",
+    "timestamp": 1783017327000
+  },
+  {
+    "chapter": "Alna",
+    "timestamp": 1783017326000
+  },
+  {
+    "chapter": "Lillestrøm",
+    "timestamp": 1783017325000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1783017323000
+  },
+  {
+    "chapter": "Grorud",
+    "timestamp": 1783017322000
+  },
+  {
+    "chapter": "Rælingen",
+    "timestamp": 1783017321000
+  },
+  {
+    "chapter": "Gamle",
+    "timestamp": 1783017320000
+  },
+  {
+    "chapter": "Halden",
+    "timestamp": 1783017318000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1783017317000
+  },
+  {
+    "chapter": "Søndre",
+    "timestamp": 1783017316000
+  },
+  {
+    "chapter": "Alna",
+    "timestamp": 1783017315000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1783017313000
+  },
+  {
+    "chapter": "Sagene",
+    "timestamp": 1783017312000
+  },
+  {
+    "chapter": "Ullensaker",
+    "timestamp": 1783017311000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1783017310000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1783017309000
+  },
+  {
+    "chapter": "Nordstrand",
+    "timestamp": 1783017307000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1783017034000
+  },
+  {
+    "chapter": "Grorud",
+    "timestamp": 1783017033000
+  },
+  {
+    "chapter": "Nordstrand",
+    "timestamp": 1783017031000
+  },
+  {
+    "chapter": "Vestre",
+    "timestamp": 1783017030000
+  },
+  {
+    "chapter": "Nordland",
+    "timestamp": 1783017029000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1783017027000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1783017026000
+  },
+  {
+    "chapter": "Indre",
+    "timestamp": 1783017024000
+  },
+  {
+    "chapter": "Trysil",
+    "timestamp": 1783017023000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1783017022000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1783017021000
+  },
+  {
+    "chapter": "Tønsberg",
+    "timestamp": 1783017020000
+  },
+  {
+    "chapter": "Bærum",
+    "timestamp": 1783017019000
+  },
+  {
+    "chapter": "Indre",
+    "timestamp": 1783017017000
+  },
+  {
+    "chapter": "Nesodden",
+    "timestamp": 1783017016000
+  },
+  {
+    "chapter": "Bjerke",
+    "timestamp": 1783017014000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1783017013000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1783017012000
+  }
+]
