@@ -1,5 +1,21 @@
 [
   {
+    "chapter": "St.",
+    "timestamp": 1786434013000
+  },
+  {
+    "chapter": "Hamar",
+    "timestamp": 1786434012000
+  },
+  {
+    "chapter": "Lørenskog",
+    "timestamp": 1786434010000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1786434009000
+  },
+  {
     "chapter": "Ås",
     "timestamp": 1786347630000
   },
@@ -70,133 +86,5 @@
   {
     "chapter": "Gjerdrum",
     "timestamp": 1786347607000
-  },
-  {
-    "chapter": "MDG",
-    "timestamp": 1786347328000
-  },
-  {
-    "chapter": "Nittedal",
-    "timestamp": 1786347326000
-  },
-  {
-    "chapter": "Indre",
-    "timestamp": 1786347325000
-  },
-  {
-    "chapter": "Grünerløkka",
-    "timestamp": 1786347324000
-  },
-  {
-    "chapter": "Gamle",
-    "timestamp": 1786347323000
-  },
-  {
-    "chapter": "Grünerløkka",
-    "timestamp": 1786347321000
-  },
-  {
-    "chapter": "Midtfylket",
-    "timestamp": 1786347320000
-  },
-  {
-    "chapter": "Melhus",
-    "timestamp": 1786347319000
-  },
-  {
-    "chapter": "Troms",
-    "timestamp": 1786347318000
-  },
-  {
-    "chapter": "Østensjø",
-    "timestamp": 1786347317000
-  },
-  {
-    "chapter": "St.",
-    "timestamp": 1786347314000
-  },
-  {
-    "chapter": "Færder",
-    "timestamp": 1786347313000
-  },
-  {
-    "chapter": "Bærum",
-    "timestamp": 1786347312000
-  },
-  {
-    "chapter": "Bergen",
-    "timestamp": 1786347311000
-  },
-  {
-    "chapter": "Tønsberg",
-    "timestamp": 1786347310000
-  },
-  {
-    "chapter": "Alna",
-    "timestamp": 1786347308000
-  },
-  {
-    "chapter": "Nordre",
-    "timestamp": 1786347307000
-  },
-  {
-    "chapter": "Stavanger",
-    "timestamp": 1786347027000
-  },
-  {
-    "chapter": "Søndre",
-    "timestamp": 1786347026000
-  },
-  {
-    "chapter": "Sagene",
-    "timestamp": 1786347024000
-  },
-  {
-    "chapter": "Tromsø",
-    "timestamp": 1786347023000
-  },
-  {
-    "chapter": "Østensjø",
-    "timestamp": 1786347022000
-  },
-  {
-    "chapter": "Trondheim",
-    "timestamp": 1786347021000
-  },
-  {
-    "chapter": "Nord-Østerdal",
-    "timestamp": 1786347019000
-  },
-  {
-    "chapter": "Grünerløkka",
-    "timestamp": 1786347018000
-  },
-  {
-    "chapter": "Bærum",
-    "timestamp": 1786347017000
-  },
-  {
-    "chapter": "St.",
-    "timestamp": 1786347016000
-  },
-  {
-    "chapter": "Hemnes",
-    "timestamp": 1786347014000
-  },
-  {
-    "chapter": "Nordre",
-    "timestamp": 1786347013000
-  },
-  {
-    "chapter": "Nittedal",
-    "timestamp": 1786347012000
-  },
-  {
-    "chapter": "Trondheim",
-    "timestamp": 1786347011000
-  },
-  {
-    "chapter": "St.",
-    "timestamp": 1786347009000
   }
 ]
