@@ -1,5 +1,9 @@
 [
   {
+    "chapter": "St.",
+    "timestamp": 1787042437000
+  },
+  {
     "chapter": "Tønsberg",
     "timestamp": 1786966819000
   },
@@ -42,17 +46,5 @@
   {
     "chapter": "Trøndelag",
     "timestamp": 1786966807000
-  },
-  {
-    "chapter": "Bjørnafjorden",
-    "timestamp": 1786952415000
-  },
-  {
-    "chapter": "St.",
-    "timestamp": 1786952414000
-  },
-  {
-    "chapter": "Skien",
-    "timestamp": 1786952413000
   }
 ]
