@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "chapter": "Steinkjer",
+    "timestamp": 1788260718000
+  },
+  {
+    "chapter": "Agder",
+    "timestamp": 1788260716000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1788260715000
+  },
+  {
+    "chapter": "Kristiansand",
+    "timestamp": 1788260713000
+  },
+  {
+    "chapter": "Ås",
+    "timestamp": 1788260711000
+  }
+]
