@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "chapter": "Bærum",
+    "timestamp": 1789372818000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1789372817000
+  },
+  {
+    "chapter": "Ullensaker",
+    "timestamp": 1789372816000
+  },
+  {
+    "chapter": "Kristiansand",
+    "timestamp": 1789372814000
+  },
+  {
+    "chapter": "Frogner",
+    "timestamp": 1789372813000
+  },
+  {
+    "chapter": "Larvik",
+    "timestamp": 1789372812000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1789372811000
+  },
+  {
+    "chapter": "Asker",
+    "timestamp": 1789372810000
+  }
+]
