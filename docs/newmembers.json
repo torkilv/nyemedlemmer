@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "chapter": "Gamle",
+    "timestamp": 1789983012000
+  },
+  {
+    "chapter": "Arendal",
+    "timestamp": 1789983011000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1789983009000
+  }
+]
