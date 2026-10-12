@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "chapter": "Gamle",
+    "timestamp": 1791791413000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1791791412000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1791791411000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1791791410000
+  },
+  {
+    "chapter": "Tromsø",
+    "timestamp": 1791791409000
+  },
+  {
+    "chapter": "Ålesund",
+    "timestamp": 1791791408000
+  },
+  {
+    "chapter": "Sandefjord",
+    "timestamp": 1791791407000
+  }
+]
