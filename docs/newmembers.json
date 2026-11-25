@@ -1,5 +1,25 @@
 [
   {
+    "chapter": "Frogner",
+    "timestamp": 1795632309000
+  },
+  {
+    "chapter": "Grünerløkka",
+    "timestamp": 1795624509000
+  },
+  {
+    "chapter": "Nordre",
+    "timestamp": 1795615212000
+  },
+  {
+    "chapter": "Stavanger",
+    "timestamp": 1795609810000
+  },
+  {
+    "chapter": "Sagene",
+    "timestamp": 1795608909000
+  },
+  {
     "chapter": "Asker",
     "timestamp": 1795600210000
   },
@@ -10,9 +30,5 @@
   {
     "chapter": "Nordstrand",
     "timestamp": 1795600208000
-  },
-  {
-    "chapter": "Nesodden",
-    "timestamp": 1795526708000
   }
 ]
