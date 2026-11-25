@@ -1,14 +1,18 @@
 [
   {
+    "chapter": "Asker",
+    "timestamp": 1795600210000
+  },
+  {
+    "chapter": "Bergen",
+    "timestamp": 1795600209000
+  },
+  {
+    "chapter": "Nordstrand",
+    "timestamp": 1795600208000
+  },
+  {
     "chapter": "Nesodden",
     "timestamp": 1795526708000
-  },
-  {
-    "chapter": "St.",
-    "timestamp": 1795509308000
-  },
-  {
-    "chapter": "Trondheim",
-    "timestamp": 1795509307000
   }
 ]
