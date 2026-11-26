@@ -1,26 +1,18 @@
 [
   {
+    "chapter": "Stavanger",
+    "timestamp": 1795722614000
+  },
+  {
+    "chapter": "Ås",
+    "timestamp": 1795700114000
+  },
+  {
+    "chapter": "Trondheim",
+    "timestamp": 1795700113000
+  },
+  {
     "chapter": "Nordland",
     "timestamp": 1795679109000
-  },
-  {
-    "chapter": "Frogner",
-    "timestamp": 1795632309000
-  },
-  {
-    "chapter": "Grünerløkka",
-    "timestamp": 1795624509000
-  },
-  {
-    "chapter": "Nordre",
-    "timestamp": 1795615212000
-  },
-  {
-    "chapter": "Stavanger",
-    "timestamp": 1795609810000
-  },
-  {
-    "chapter": "Sagene",
-    "timestamp": 1795608909000
   }
 ]
