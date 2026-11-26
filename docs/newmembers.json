@@ -1,5 +1,9 @@
 [
   {
+    "chapter": "Nordland",
+    "timestamp": 1795679109000
+  },
+  {
     "chapter": "Frogner",
     "timestamp": 1795632309000
   },
@@ -18,17 +22,5 @@
   {
     "chapter": "Sagene",
     "timestamp": 1795608909000
-  },
-  {
-    "chapter": "Asker",
-    "timestamp": 1795600210000
-  },
-  {
-    "chapter": "Bergen",
-    "timestamp": 1795600209000
-  },
-  {
-    "chapter": "Nordstrand",
-    "timestamp": 1795600208000
   }
 ]
