@@ -1,5 +1,13 @@
 [
   {
+    "chapter": "Eidsvoll",
+    "timestamp": 1795767609000
+  },
+  {
+    "chapter": "Tromsø",
+    "timestamp": 1795767608000
+  },
+  {
     "chapter": "Stavanger",
     "timestamp": 1795722614000
   },
@@ -10,9 +18,5 @@
   {
     "chapter": "Trondheim",
     "timestamp": 1795700113000
-  },
-  {
-    "chapter": "Nordland",
-    "timestamp": 1795679109000
   }
 ]
