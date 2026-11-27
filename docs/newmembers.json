@@ -1,22 +1,22 @@
 [
   {
+    "chapter": "Trondheim",
+    "timestamp": 1795794910000
+  },
+  {
+    "chapter": "Frogner",
+    "timestamp": 1795794909000
+  },
+  {
+    "chapter": "Bærum",
+    "timestamp": 1795794907000
+  },
+  {
     "chapter": "Eidsvoll",
     "timestamp": 1795767609000
   },
   {
     "chapter": "Tromsø",
     "timestamp": 1795767608000
-  },
-  {
-    "chapter": "Stavanger",
-    "timestamp": 1795722614000
-  },
-  {
-    "chapter": "Ås",
-    "timestamp": 1795700114000
-  },
-  {
-    "chapter": "Trondheim",
-    "timestamp": 1795700113000
   }
 ]
